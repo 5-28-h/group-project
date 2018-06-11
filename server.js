@@ -1,19 +1,28 @@
 // module imports
 const express = require('express');
 const path = require('path');
-const bodyParser = require("body-parser");
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const morgan = require('morgan');
+const bcrypt = require('bcrypt');
+const passport = require('passport');
 const cors = require('cors')
 
 // express config
 const app = express();
 app.use(bodyParser.json())
 
+//connect to DB
+mongoose.connect('mongodb://admin:password1@ds131329.mlab.com:31329/group-project')
+.then(() => console.log('Database connected'))
+.catch(err => console.log('Error Connecting to Database'));
+
 // !!! DEVELOPMENT ONLY !!! //
 // var corsOptions = {
 //     origin: 'http://localhost:4200',
-//     optionsSuccessStatus: 200 
+//     optionsSuccessStatus: 200
 // }
-  
+
 // app.use(cors(corsOptions))
 
 
@@ -24,5 +33,8 @@ app.use(express.static(distDir));
 app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname + "/dist/group-project/"))
 })
+
+const users = require('./routes/users');
+app.use('/', users);
 
 app.listen(process.env.PORT || 8080);
