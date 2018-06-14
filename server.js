@@ -8,6 +8,9 @@ const bcrypt = require('bcrypt');
 const passport = require('passport');
 const cors = require('cors')
 
+require("./models/user");
+require('./config/passport');
+
 // express config
 const app = express();
 app.use(bodyParser.json())

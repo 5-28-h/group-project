@@ -18,8 +18,12 @@ const UserSchema =  mongoose.Schema({
 });
 
 UserSchema.method("setPassword", function(password){
-  let hashpassword = bcrypt.hashSync(password, 10);
- return hashpassword;
+  this.password = bcrypt.hashSync(password, 10);
+  return this.password;
+});
+
+UserSchema.method("validatePassword", function(password){
+return  (bcrypt.compareSync(password, this.password));
 });
 
 
