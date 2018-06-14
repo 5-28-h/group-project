@@ -21,5 +21,18 @@ router.post('/register', (req, res, next) => {
   })
 });
 
+router.post('/login', ((req, res, next) => {
+  passport.authenticate('local', function(err, user, info){
+      if(err){
+        return next(err);
+      }
+      if(user){
+        return res.json(user)
+        // return res.json({token: user.generateJWT()});
+      }
+      return res.status(400).send(info);
+    })(req, res, next);
+}));
+
 
   module.exports = router;
