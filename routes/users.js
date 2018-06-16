@@ -3,6 +3,7 @@ const router = express.Router();
 const passport = require('passport');
 const User = require('../models/user');
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
 
 
 //register - express route
@@ -27,8 +28,8 @@ router.post('/login', ((req, res, next) => {
         return next(err);
       }
       if(user){
-        return res.json(user)
-        // return res.json({token: user.generateJWT()});
+        return res.json({user: user,
+        token: user.signJWT()})
       }
       return res.status(400).send(info);
     })(req, res, next);
