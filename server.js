@@ -10,6 +10,7 @@ const cors = require('cors')
 
 require("./models/user");
 require('./config/passport');
+require('./config/database');
 
 // express config
 const app = express();

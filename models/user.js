@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const config = require('../config/database');
+const jwt = require('jsonwebtoken');
 
 
 const UserSchema =  mongoose.Schema({
@@ -24,6 +26,13 @@ UserSchema.method("setPassword", function(password){
 
 UserSchema.method("validatePassword", function(password){
 return  (bcrypt.compareSync(password, this.password));
+});
+
+UserSchema.method("signJWT", function(){
+  return jwt.sign({
+    id:this._id,
+    username: this.username,
+  }, config.secret);
 });
 
 
