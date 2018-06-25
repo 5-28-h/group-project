@@ -8,10 +8,12 @@ const jwt = require('jsonwebtoken');
 
 //register - express route
 router.post('/register', (req, res, next) => {
+  console.log(req.body);
   let newUser = new User();
+    newUser.name = req.body.name;
+    newUser.email = req.body.email;
     newUser.username = req.body.username;
     newUser.password = newUser.setPassword(req.body.password);
-    newUser.email = req.body.email;
 
     newUser.save((err) => {
     if(err) {

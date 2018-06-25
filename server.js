@@ -14,7 +14,9 @@ require('./config/database');
 
 // express config
 const app = express();
-app.use(bodyParser.json())
+app.use(morgan('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
 
 //connect to DB
 mongoose.connect('mongodb://admin:password1@ds131329.mlab.com:31329/group-project')
