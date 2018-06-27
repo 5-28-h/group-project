@@ -10,10 +10,13 @@ import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { JournalEntriesComponent } from './journal-entries/journal-entries.component';
 import { UserService } from './services/user.service';
+import { AuthenticationService } from './services/authentication.service';
 import { User } from './models/user';
 
 const appRoutes: Routes = [
-  { path: 'register', component: RegisterComponent }
+  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'profile', component: ProfileComponent }
 ];
 
 
@@ -37,6 +40,7 @@ const appRoutes: Routes = [
   providers: [
     RegisterComponent,
     UserService,
+    AuthenticationService,
     User
   ],
   bootstrap: [AppComponent]

@@ -34,6 +34,7 @@ router.post('/login', ((req, res, next) => {
         token: user.signJWT()})
       }
       return res.status(400).send(info);
+      console.log(info)
     })(req, res, next);
 }));
 

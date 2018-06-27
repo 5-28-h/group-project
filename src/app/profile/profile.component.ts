@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from '../services/authentication.service';
+import { Router, ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-profile',
@@ -7,9 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  constructor(public authenticationService: AuthenticationService, public router: Router) {
+    let token = localStorage.getItem('token');
+      	if(!token) {
+    			window.location.href = '/login';
+        }
+   }
 
-  ngOnInit() {
+  logout() {
+      // remove user from local storage to log user out
+      localStorage.removeItem('currentUser');
+      localStorage.removeItem('token');
+      this.router.navigate(['/login']);
   }
 
+  ngOnInit() {
+
+ }
 }
