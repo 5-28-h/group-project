@@ -20,11 +20,13 @@
     <div class="card-body">
         <form class="form" role="form" method="POST">
             <div class="form-group">
-              <input id="css-mood" type="text" name="mood" ng-model="Pcontroller.jentry.mood" class="form-control form-control-lg rounded-1" placeholder="How do you feel?">
-              <button type="submit" ng-click="Pcontroller.addJentry()" class="btn btn-primary">Save Entry</button>
+              <input type="text" name="mood"  class="form-control form-control-lg rounded-1" [(ngModel)]="jentry.mood" placeholder="How did you feel?">
+                <input type="text" name="location"  class="form-control form-control-lg rounded-1" [(ngModel)]="jentry.location" placeholder="Where were you?">
+                  <input type="text" name="date"  class="form-control form-control-lg rounded-1" [(ngModel)]="jentry.date" placeholder="Date?">
+              <button type="submit" (click)="saveJournalEntry()" class="btn btn-primary">Save Entry</button>
             </div>
             <div class="form-group">
-              <textarea name="journalEntry" ng-model="Pcontroller.jentry.journalEntry" class="form-control form-control-lg rounded-1" rows="50" cols="80"></textarea>
+              <textarea name="journalEntry" [(ngModel)]="jentry.journalEntry"  class="form-control form-control-lg rounded-1" rows="50" cols="80"></textarea>
             </div>
         </form>
     </div>

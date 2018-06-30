@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../models/user';
 import { UserService } from '../services/user.service';
-import { map } from "rxjs/operators";
 
 @Component({
   selector: 'app-register',
@@ -15,7 +14,6 @@ export class RegisterComponent implements OnInit {
 
    registerUser(user){
       this.userService.create(this.user)
-      // .pipe(map((response: any) => response.json()))
       .subscribe();
           console.log(this.user);
 }

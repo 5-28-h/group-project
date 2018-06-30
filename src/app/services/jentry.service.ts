@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { User } from '../models/user';
+import { Jentry } from '../models/jentry';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -10,12 +10,12 @@ const httpOptions = {
 }
 
 @Injectable()
-export class UserService {
+export class JentryService {
     constructor(
       public http: HttpClient) { }
 
-    create(user:User): Observable<User> {
-      return this.http.post<User>('/register', user, httpOptions);
+    saveJournalEntry(jentry:Jentry): Observable<Jentry> {
+      return this.http.post<Jentry>('/user/profile', jentry, httpOptions);
 
 
     }
