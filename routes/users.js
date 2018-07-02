@@ -30,8 +30,14 @@ router.post('/login', ((req, res, next) => {
         return next(err);
       }
       if(user){
-        return res.json({user: user,
-        token: user.signJWT()})
+        return res.json({
+          success: true,
+          token: user.signJWT(),
+          id: user._id,
+          name: user.name,
+          username: user.username,
+          email: user.email
+        })
       }
       return res.status(400).send(info);
       console.log(info)

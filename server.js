@@ -9,6 +9,7 @@ const passport = require('passport');
 const cors = require('cors')
 
 require("./models/user");
+require("./models/jentry");
 require('./config/passport');
 require('./config/database');
 
@@ -17,6 +18,8 @@ const app = express();
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 //connect to DB
 mongoose.connect('mongodb://admin:password1@ds131329.mlab.com:31329/group-project')
@@ -41,6 +44,8 @@ app.get('/*', (req, res) => {
 })
 
 const users = require('./routes/users');
+const jentries = require('./routes/jentry.routes');
+app.use('/user', jentries);
 app.use('/', users);
 
 app.listen(process.env.PORT || 8080);
