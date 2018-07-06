@@ -3,10 +3,11 @@ const router = express.Router();
 const passport = require('passport');
 const User = require('../models/user');
 const mongoose = require('mongoose');
+const ObjectId = require('mongodb').ObjectID;
 const jwt = require('jsonwebtoken');
 
 
-//register - express route
+//Register User 
 router.post('/register', (req, res, next) => {
   console.log(req.body);
   let newUser = new User();
@@ -24,6 +25,7 @@ router.post('/register', (req, res, next) => {
   })
 });
 
+//Login to User account
 router.post('/login', ((req, res, next) => {
   passport.authenticate('local', function(err, user, info){
       if(err){
@@ -43,6 +45,39 @@ router.post('/login', ((req, res, next) => {
       console.log(info)
     })(req, res, next);
 }));
+
+//Change User Information
+
+router.put('/profile/:_id', (req, res) => {
+  let UpdateUser = new User();
+  console.log(req.params._id)
+  User.findOneAndUpdate(req.params._id, {
+    name: req.body.name,
+    email: req.body.email,
+    username: req.body.username,
+    password: UpdateUser.setPassword(req.body.password)
+  }, function(err, result){
+        if(err){
+            console.log(err);
+        }
+        res.send('User Info Updated')
+    });
+
+
+})
+
+//Delete User
+router.delete('/profile/:_id', ((req, res) => {
+  User.findByIdAndRemove(req.params._id, (err, result) => {
+    if (err) return res.status(500).send(err);
+    const responseMsg = {
+      message: "User account successfully closed"
+    };
+    return res.status(200).send(responseMsg);
+    console.log(result);
+  });
+
+}))
 
 
   module.exports = router;

@@ -39,13 +39,13 @@ mongoose.connect('mongodb://admin:password1@ds131329.mlab.com:31329/group-projec
 var distDir = __dirname + "/dist/group-project/";
 app.use(express.static(distDir));
 
-app.get('/*', (req, res) => {
-    res.sendFile(path.join(__dirname + "/dist/group-project/"))
-})
-
 const users = require('./routes/users');
 const jentries = require('./routes/jentry.routes');
 app.use('/user', jentries);
 app.use('/', users);
+
+app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname + "/dist/group-project/"))
+})
 
 app.listen(process.env.PORT || 8080);
