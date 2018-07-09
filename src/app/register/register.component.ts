@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { User } from '../models/user';
 import { UserService } from '../services/user.service';
 
@@ -10,12 +11,13 @@ import { UserService } from '../services/user.service';
 export class RegisterComponent implements OnInit {
   constructor(
     public user: User,
-    public userService: UserService) { }
+    public userService: UserService,
+    public router: Router) { }
 
    registerUser(user){
       this.userService.create(this.user)
       .subscribe();
-          console.log(this.user);
+          this.router.navigate(['/login']);
 }
   ngOnInit() {
   }
