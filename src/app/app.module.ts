@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { BsDropdownModule } from 'ngx-bootstrap';
 
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
@@ -14,11 +15,14 @@ import { JentryService } from './services/jentry.service';
 import { AuthenticationService } from './services/authentication.service';
 import { User } from './models/user';
 import { Jentry } from './models/jentry';
+import { UpdateUserComponent } from './update-user/update-user.component';
 
 const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'profile', component: ProfileComponent }
+  { path: 'profile', component: ProfileComponent },
+  { path: 'journal', component: JournalEntriesComponent },
+  { path: 'update', component: UpdateUserComponent }
 ];
 
 
@@ -28,12 +32,16 @@ const appRoutes: Routes = [
     RegisterComponent,
     LoginComponent,
     ProfileComponent,
-    JournalEntriesComponent
+    JournalEntriesComponent,
+    UpdateUserComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    BsDropdownModule.forRoot(
+      appRoutes
+    ),
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true }

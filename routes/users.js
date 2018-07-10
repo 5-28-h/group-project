@@ -7,7 +7,7 @@ const ObjectId = require('mongodb').ObjectID;
 const jwt = require('jsonwebtoken');
 
 
-//Register User 
+//Register User
 router.post('/register', (req, res, next) => {
   console.log(req.body);
   let newUser = new User();
@@ -48,7 +48,24 @@ router.post('/login', ((req, res, next) => {
 
 //Change User Information
 
-router.put('/profile/:_id', (req, res) => {
+router.get('/update/:_id', ((req, res) => {
+  User.findById({_id: req.params._id}, (err, user) => {
+    if (err) return res.status(500).send(err);
+    if(user){
+      console.log(user)
+      return res.json({
+        success: true,
+        token: user.signJWT(),
+        id: user._id,
+        name: user.name,
+        username: user.username,
+        email: user.email
+      })
+    }
+    })
+  }));
+
+router.put('/update/:_id', (req, res) => {
   let UpdateUser = new User();
   console.log(req.params._id)
   User.findOneAndUpdate(req.params._id, {
@@ -68,7 +85,7 @@ router.put('/profile/:_id', (req, res) => {
 
 //Delete User
 router.delete('/profile/:_id', ((req, res) => {
-  User.findByIdAndRemove(req.params._id, (err, result) => {
+  User.findByIdAndRemove({_id: req.params._id}, (err, result) => {
     if (err) return res.status(500).send(err);
     const responseMsg = {
       message: "User account successfully closed"
