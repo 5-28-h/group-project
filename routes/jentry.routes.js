@@ -26,7 +26,7 @@ router.post('/profile', (req, res, next) => {
 
 // Get all journal entries for a specific user by ID
 router.get('/journalentries/:user_id', (req, res) => {
-  Jentry.find(req.params._id, (err, jentry) => {
+  Jentry.find({user_id: req.params.user_id}, (err, jentry) => {
     console.log(jentry + "this is what your looking for")
     if(err){
       console.log(err);
@@ -40,8 +40,10 @@ router.get('/journalentries/:user_id', (req, res) => {
 })
 
 // Get all journal entries for a specific Mood
-// router.get('/journalentries/:user_id', (req, res) => {
-//   Jentry.findById({user_id: req.params._id}, {mood: req.query.mood}, (err, jentry) => {
+// router.get('/journalentries', (req, res) => {
+//   console.log(req.query)
+//   console.log(req.params)
+//   Jentry.find({mood: req.query.mood, user_id: req.query.user_id}, (err, jentry) => {
 //     console.log(jentry + "this is what your looking for")
 //     if(err){
 //       console.log(err);

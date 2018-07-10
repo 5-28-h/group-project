@@ -11,13 +11,18 @@ const httpOptions = {
 
 @Injectable()
 export class JentryService {
+      user_id: String;
+      userData = JSON.parse(localStorage.getItem('currentUser'));
     constructor(
       public http: HttpClient) { }
 
     saveJournalEntry(jentry:Jentry): Observable<Jentry> {
       return this.http.post<Jentry>('/user/profile', jentry, httpOptions);
+      }
 
-
-    }
+      showJournalEntries(){
+        this.user_id = this.userData.id
+        return this.http.get(`/user/journalentries/${this.user_id}`);
+      }
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { JentryService } from '../services/jentry.service';
+import { UserService } from '../services/user.service';
 import { Jentry } from '../models/jentry';
 import { User } from '../models/user';
 
@@ -18,13 +19,14 @@ export class ProfileComponent implements OnInit {
   userData = JSON.parse(localStorage.getItem('currentUser'));
 
   constructor(
-    public authenticationService: AuthenticationService,
     public router: Router,
     public jentry: Jentry,
     public user: User,
-    public jentryService: JentryService
+    public jentryService: JentryService,
+    public userService: UserService
   ) {
     this.name = this.userData.name;
+    //Check if logged in
     let token = localStorage.getItem('token');
       	if(!token) {
     			window.location.href = '/login';
@@ -35,7 +37,7 @@ export class ProfileComponent implements OnInit {
       // remove user from local storage to log user out
       localStorage.removeItem('currentUser');
       localStorage.removeItem('token');
-      this.router.navigate(['/login']);
+      	window.location.href = '/login';
   }
 
   saveJournalEntry(){
@@ -46,6 +48,12 @@ export class ProfileComponent implements OnInit {
     this.jentry.location = "";
     this.jentry.date = "";
     this.jentry.journalEntry = "";
+  }
+
+  deleteUser(){
+    this.userService.deleteUser()
+    .subscribe();
+    this.logout();
   }
 
   ngOnInit() {

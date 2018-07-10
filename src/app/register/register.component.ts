@@ -20,6 +20,11 @@ export class RegisterComponent implements OnInit {
           this.router.navigate(['/login']);
 }
   ngOnInit() {
+    this.user.name = null;
+    this.user.email = null;
+    this.user.username = null;
+    this.user.password = null;
+
   }
 
 }

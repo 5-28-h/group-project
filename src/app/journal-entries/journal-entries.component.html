@@ -1,3 +1,25 @@
-<p>
-  journal-entries works!
-</p>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <button type="submit" class="btn btn-dark btn-lg"><a routerLink="/profile">Home</a></button>
+      </li>
+      <li class="nav-item">
+        <button type="button" class="btn btn-dark btn-lg"><a routerLink="/journal">My Journal Entries</a></button>
+      </li>
+      <li class="nav-item">
+        <button (click)="logout()" type="button" class="btn btn-lg">Logout</button>
+      </li>
+      <li>
+        <div class="btn-group" dropdown>
+          <button dropdownToggle type="button" (click)="goHome()" class="btn dropdown-toggle">
+            Settings<span class="caret"></span>
+          </button>
+        </div>
+      </li>
+    </ul>
+  </nav>
+  <div class="jumbotron">
+    <h1>Your Past Journal Entries</h1>
+    <button type="button" name="button" (click)="showJournalEntries()">Show Entries</button>
+      <p>{{data}}</p>
+  </div>
