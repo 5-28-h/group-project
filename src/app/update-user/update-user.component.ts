@@ -13,7 +13,6 @@ export class UpdateUserComponent implements OnInit {
 
   constructor(
     public user: User,
-    public router: Router,
     public userService: UserService
   ) { }
 
@@ -25,7 +24,7 @@ export class UpdateUserComponent implements OnInit {
 }
 
   goHome(){
-    this.router.navigate(['/profile']);
+    window.location.href = "/profile";
   }
 
   ngOnInit() {

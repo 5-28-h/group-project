@@ -31,34 +31,25 @@ router.get('/journalentries/:user_id', (req, res) => {
     if(err){
       console.log(err);
     }else{
-      res.json({
-        success: true,
-        jentry: jentry
-      })
+      res.send(jentry)
     }
   })
 })
 
-// Get all journal entries for a specific Mood
-// router.get('/journalentries', (req, res) => {
-//   console.log(req.query)
-//   console.log(req.params)
-//   Jentry.find({mood: req.query.mood, user_id: req.query.user_id}, (err, jentry) => {
-//     console.log(jentry + "this is what your looking for")
-//     if(err){
-//       console.log(err);
-//     }else{
-//       res.json({
-//         success: true,
-//         jentry: jentry
-//       })
-//     }
-//   })
-// })
+// Get all journal entries for a specific key
+router.get('/journalentries', (req, res) => {
+  Jentry.find({mood: req.query.mood, user_id: req.query.user_id}, (err, jentry) => {
+    if(err){
+      console.log(err);
+    }else{
+      res.send(jentry)
+    }
+  })
+})
 
 //Update Journal Entry By Entry ID
-router.put('/journalentries/:_id', (req, res) => {
-  Jentry.findOneAndUpdate(req.params._id, {
+router.put('/journalentries/:user_id/:_id', (req, res) => {
+  Jentry.findOneAndUpdate({user_id: req.params.user_id, _id: req.params._id}, {
     mood: req.body.mood,
     location: req.body.location,
     date: req.body.date,
@@ -72,8 +63,8 @@ router.put('/journalentries/:_id', (req, res) => {
   });
 
 //Delete One Journal Entry by Entry ID
-  router.delete('/journalentries/:_id', (req, res) => {
-    Jentry.findOneAndRemove(req.params._id, (err, result) => {
+  router.delete('/journalentries/:user_id/:_id', (req, res) => {
+    Jentry.findOneAndRemove({user_id: req.params.user_id, _id: req.params._id}, (err, result) => {
       if (err) return res.status(500).send(err);
       const responseMsg = {
         message: "Your Journal Entry has been successfully removed"

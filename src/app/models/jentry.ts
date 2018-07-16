@@ -3,5 +3,5 @@ export class Jentry {
     journalEntry: string;
     mood: string;
     location: string;
-    date: string;
+    date: number;
 }

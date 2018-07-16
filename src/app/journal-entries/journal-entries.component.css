@@ -1,0 +1,82 @@
+h1{
+  margin-top: 13%;
+}
+.journal{
+  background-image: url("/assets/images/journal1.jpg");
+  background-size: 100%;
+  height: auto;
+  max-height: 600px;
+  background-repeat: no-repeat;
+  display: block;
+  border-radius: 30px;
+  margin-bottom: 5%;
+}
+
+input {
+  background: rgba(255,255,255,0.1);
+  border: none;
+  margin-top: 3.2%;
+  margin-left: 4%;
+}
+
+#date {
+  margin-left: 4%;
+  margin-top: .5%
+}
+
+textarea {
+  background: rgba(255,255,255,0.1);
+  border: none;
+  outline: none;
+  width: 100%;
+}
+@media (max-width: 1024px) {
+    .journal {
+      background-image: url("/assets/images/journal1.jpg");
+      background-size: cover;
+      max-height: 600px;
+      background-repeat: no-repeat;
+      display: block;
+      box-sizing: border-box;
+      border-radius: 30px;
+    }
+}
+@media (max-width: 768px) {
+    .journal {
+      background-image: url("/assets/images/journal2.jpg");
+      background-size: cover;
+      max-height: 600px;
+      background-repeat: no-repeat;
+      display: block;
+      box-sizing: border-box;
+      border-radius: 30px;
+    }
+}
+
+@media (max-width: 425px) {
+    .journal {
+      background-image: url("/assets/images/journal2.jpg");
+      background-size: cover;
+      max-height: 100%;
+      background-repeat: no-repeat;
+      display: block;
+      box-sizing: border-box;
+      border-radius: 30px;
+    }
+}
+
+@media (max-width: 425px) {
+    input {
+      background: rgba(255,255,255,0.1);
+      border: none;
+      padding: .2%;
+      margin-top: 5%;
+      margin-left: 4%;
+      position: relative;
+      display: inline;
+      outline: none;
+      width: auto;
+      height: auto;
+
+    }
+}

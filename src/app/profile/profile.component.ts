@@ -17,7 +17,7 @@ import { User } from '../models/user';
 export class ProfileComponent implements OnInit {
   name: String;
   userData = JSON.parse(localStorage.getItem('currentUser'));
-
+  date: number = Date.now();
   constructor(
     public router: Router,
     public jentry: Jentry,
@@ -42,11 +42,11 @@ export class ProfileComponent implements OnInit {
 
   saveJournalEntry(){
     this.jentry.id = this.userData.id;
+    this.jentry.date = this.date;
     this.jentryService.saveJournalEntry(this.jentry)
     .subscribe();
     this.jentry.mood = "";
     this.jentry.location = "";
-    this.jentry.date = "";
     this.jentry.journalEntry = "";
   }
 
