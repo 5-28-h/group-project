@@ -11,13 +11,12 @@ import { UserService } from '../services/user.service';
 export class RegisterComponent implements OnInit {
   constructor(
     public user: User,
-    public userService: UserService,
-    public router: Router) { }
+    public userService: UserService) { }
 
    registerUser(user){
       this.userService.create(this.user)
       .subscribe();
-          this.router.navigate(['/login']);
+          window.location.href = "/login";;
 }
   ngOnInit() {
     this.user.name = null;

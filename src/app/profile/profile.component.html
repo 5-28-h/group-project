@@ -1,22 +1,22 @@
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-    <ul class="navbar-nav">
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+  <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="navbarsExampleDefault" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault" [ngbCollapse]="!isCollapsed">
+    <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <button type="submit" class="btn btn-dark btn-lg"><a routerLink="/profile">Home</a></button>
+        <p><button type="submit" class="btn btn-dark btn-lg"><a routerLink="/profile" class="text-secondary">Home</a></button></p>
       </li>
       <li class="nav-item">
-        <button type="button" class="btn btn-dark btn-lg"><a routerLink="/journal">My Journal Entries</a></button>
+        <p><button type="button" class="btn btn-dark btn-lg"><a routerLink="/journal" class="text-secondary">My Journal Entries</a></button></p>
       </li>
-      <li class="nav-item">
-        <button (click)="logout()" type="button" class="btn btn-lg">Logout</button>
-      </li>
-      <li>
+      <li class="nav-item dropdown">
         <div class="btn-group" dropdown>
-          <button dropdownToggle type="button" class="btn dropdown-toggle">
+          <button dropdownToggle type="button" class="btn btn-sm btn-dark dropdown-toggle">
             Settings<span class="caret"></span>
           </button>
           <ul *dropdownMenu class="dropdown-menu" role="menu">
-            <li role="menuitem"><a class="dropdown-item" href="#">Action</a></li>
-            <li role="menuitem"><a class="dropdown-item" href="#">Another action</a></li>
             <li role="menuitem"><a class="dropdown-item" routerLink="/update">Update Account</a></li>
             <li class="divider dropdown-divider"></li>
             <li role="menuitem"><a class="dropdown-item" (click)="deleteUser()">Delete Account</a></li>
@@ -24,23 +24,21 @@
         </div>
       </li>
     </ul>
-  </nav>
-<div class="jumbotron">
-<h1 class="text-center">Hello {{name}}</h1>
-<div class="card rounded-5">
-    <div class="card-body">
-        <form class="form" role="form" method="POST">
-            <div class="form-group">
-              <input type="text" name="mood"  class="form-control form-control-lg rounded-1" [(ngModel)]="jentry.mood" placeholder="How did you feel?">
-                <input type="text" name="location"  class="form-control form-control-lg rounded-1" [(ngModel)]="jentry.location" placeholder="Where were you?">
-                  <input type="text" name="date"  class="form-control form-control-lg rounded-1" [(ngModel)]="jentry.date" placeholder="Date?">
-              <button type="submit" (click)="saveJournalEntry()" class="btn btn-primary">Save Entry</button>
-            </div>
-            <div class="form-group">
-              <textarea name="journalEntry" [(ngModel)]="jentry.journalEntry"  class="form-control form-control-lg rounded-1" rows="50" cols="80"></textarea>
-            </div>
-        </form>
-    </div>
-    <!--/card-block-->
+      <button class="btn btn-outline-secondary my-2 my-sm-0" (click)="logout()" type="button">Logout</button>
   </div>
+</nav>
+
+  <h1 class="text-center">Welcome to your Journal {{name}}</h1>
+<div class="journal" width="auto" height="auto">
+    <form>
+        <div class="journal-425">
+          <input type="text" name="mood"   [(ngModel)]="jentry.mood" placeholder="How do you feel?">
+          <input type="text" name="location"   [(ngModel)]="jentry.location" placeholder="Where are you?">
+          <input disabled type="text" name="date" placeholder="{{date | date}}">
+          <button id="saveJentry" type="submit" (click)="saveJournalEntry()" class="btn btn-secondary btn-lg">Save Entry</button>
+        </div>
+        <div class="journal-425">
+          <textarea name="journalEntry" [(ngModel)]="jentry.journalEntry"></textarea>
+        </div>
+    </form>
 </div>

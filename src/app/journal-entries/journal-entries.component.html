@@ -1,25 +1,47 @@
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-    <ul class="navbar-nav">
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
+  <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="navbarsExampleDefault" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault" [ngbCollapse]="!isCollapsed">
+    <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <button type="submit" class="btn btn-dark btn-lg"><a routerLink="/profile">Home</a></button>
+        <p><button type="submit" class="btn btn-dark btn-lg"><a routerLink="/profile" class="text-secondary">Home</a></button></p>
       </li>
       <li class="nav-item">
-        <button type="button" class="btn btn-dark btn-lg"><a routerLink="/journal">My Journal Entries</a></button>
+        <p><button type="button" class="btn btn-dark btn-lg"><a routerLink="/journal" class="text-secondary">My Journal Entries</a></button></p>
       </li>
-      <li class="nav-item">
-        <button (click)="logout()" type="button" class="btn btn-lg">Logout</button>
-      </li>
-      <li>
+      <li class="nav-item dropdown">
         <div class="btn-group" dropdown>
-          <button dropdownToggle type="button" (click)="goHome()" class="btn dropdown-toggle">
+          <button dropdownToggle type="button" (click)="goHome()" class="btn btn-sm btn-dark dropdown-toggle">
             Settings<span class="caret"></span>
           </button>
         </div>
       </li>
     </ul>
-  </nav>
-  <div class="jumbotron">
-    <h1>Your Past Journal Entries</h1>
-    <button type="button" name="button" (click)="showJournalEntries()">Show Entries</button>
-      <p>{{data}}</p>
+      <button class="btn btn-outline-secondary my-2 my-sm-0" (click)="logout()" type="button">Logout</button>
+  </div>
+</nav>
+  <div class="container">
+    <div class="row">
+    <div class="col-2">
+    </div>
+    <div class="col-8">
+      <h1 class="text-center">Your Past Journal Entries</h1>
+        <form>
+            <ul class="list-group">
+              <li class="journal list-group-item" *ngFor="let j of jentries">
+              <input type="text" name="mood"   [value]="j.mood" (input)="j.mood=$event.target.value">
+              <input type="text" name="location"   [value]="j.location" (input)="j.location=$event.target.value">
+              <p id="date">{{j.date | date: "mediumDate"}}</p>
+              <textarea rows="15" name="journalEntry" [value]="j.journalEntry" (input)="j.journalEntry=$event.target.value"></textarea><br>
+              <button type="submit" (click)="editJentry(j)" class="btn btn-secondary btn-sm">Edit Entry</button>
+              <button type="submit" (click)="deleteJentry(j._id)" class="btn btn-secondary btn-sm">Delete Entry</button>
+              </li>
+            </ul>
+        </form>
+    </div>
+    <div class="col-2">
+    </div>
+   </div>
   </div>

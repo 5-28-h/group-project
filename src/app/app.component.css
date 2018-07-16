@@ -2,10 +2,12 @@
   background-image: url('../assets/images/login-img.jpg');
 
   /* Full height */
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
 
   /* Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: fixed;
 }

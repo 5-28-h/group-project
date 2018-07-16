@@ -10,9 +10,8 @@ import { Jentry } from '../models/jentry';
   styleUrls: ['./journal-entries.component.css']
 })
 export class JournalEntriesComponent implements OnInit {
-  public data: any;
+  public jentries: any;
   constructor(
-    public router: Router,
     public jentry: Jentry,
     public jentryService: JentryService
   ) {
@@ -31,21 +30,35 @@ export class JournalEntriesComponent implements OnInit {
   }
 
   goHome(){
-    this.router.navigate(['/profile']);
+    window.location.href = "/profile";
   }
 
   showJournalEntries(){
     this.jentryService.showJournalEntries()
     .subscribe(data =>
-      this.data = data);
+      this.jentries = data);
   }
 
-  // filterJournalEntries(){
-  //   this.jentryService.
+  deleteJentry(j){
+    this.jentryService.deleteJentry(j)
+    .subscribe();
+    window.location.href = "/journal";
+  }
+
+  editJentry(j){
+    console.log(j)
+    this.jentryService.updateJentry(j)
+    .subscribe();
+    window.location.href = "/journal";
+  }
+
+  // searchJentriesByDate(){
+  //   this.jentryService.searchJentries(this.search)
+  //   .subscribe(data =>
+  //     this.result = data);
   // }
 
   ngOnInit() {
-
+    this.showJournalEntries();
   }
-
 }

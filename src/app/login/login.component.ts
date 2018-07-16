@@ -10,13 +10,14 @@ import { User } from '../models/user';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public user: User, public authenticationService: AuthenticationService, public router: Router) { }
+  constructor(public user: User,
+              public authenticationService: AuthenticationService) { }
 
   login() {
         this.authenticationService.login(this.user.username, this.user.password)
             .subscribe(
                 data => {
-                    this.router.navigate(['/profile']);
+                    window.location.href = "/profile";
                 });
     }
 
