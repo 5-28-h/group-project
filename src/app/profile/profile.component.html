@@ -19,7 +19,7 @@
           <ul *dropdownMenu class="dropdown-menu" role="menu">
             <li role="menuitem"><a class="dropdown-item" routerLink="/update">Update Account</a></li>
             <li class="divider dropdown-divider"></li>
-            <li role="menuitem"><a class="dropdown-item" (click)="deleteUser()">Delete Account</a></li>
+            <li role="menuitem"><a class="dropdown-item text-danger" (click)="deleteUser()">Delete Account</a></li>
           </ul>
         </div>
       </li>
@@ -34,8 +34,8 @@
         <div class="journal-425">
           <input type="text" name="mood"   [(ngModel)]="jentry.mood" placeholder="How do you feel?">
           <input type="text" name="location"   [(ngModel)]="jentry.location" placeholder="Where are you?">
-          <input disabled type="text" name="date" placeholder="{{date | date}}">
-          <button id="saveJentry" type="submit" (click)="saveJournalEntry()" class="btn btn-secondary btn-lg">Save Entry</button>
+          <p>{{date | date}}</p>
+          <button id="saveJentry" type="submit" (click)="saveJournalEntry()" class="btn btn-secondary my-2 my-sm-0">Save Entry</button>
         </div>
         <div class="journal-425">
           <textarea name="journalEntry" [(ngModel)]="jentry.journalEntry"></textarea>
