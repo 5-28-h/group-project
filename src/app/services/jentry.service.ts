@@ -29,6 +29,10 @@ export class JentryService {
         this.user_id = this.userData.id
         return this.http.delete(`/user/journalentries/${this.user_id}/${j}`)
       }
+      deleteAllJentries(){
+        this.user_id = this.userData.id
+        return this.http.delete(`/user/journalentries/${this.user_id}`)
+      }
 
       searchJentries(search){
         this.user_id = this.userData.id

@@ -3,6 +3,7 @@ import { AuthenticationService } from '../services/authentication.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { JentryService } from '../services/jentry.service';
 import { UserService } from '../services/user.service';
+import { NgFlashMessageService } from 'ng-flash-messages';
 import { Jentry } from '../models/jentry';
 import { User } from '../models/user';
 
@@ -23,7 +24,8 @@ export class ProfileComponent implements OnInit {
     public jentry: Jentry,
     public user: User,
     public jentryService: JentryService,
-    public userService: UserService
+    public userService: UserService,
+    public ngFlashMessageService: NgFlashMessageService
   ) {
     this.name = this.userData.name;
     //Check if logged in
@@ -48,10 +50,17 @@ export class ProfileComponent implements OnInit {
     this.jentry.mood = "";
     this.jentry.location = "";
     this.jentry.journalEntry = "";
+    this.ngFlashMessageService.showFlashMessage({
+    messages: ["Your journal entry has been saved!"],
+    timeout: 2000,
+    type: 'success'
+  });
   }
 
   deleteUser(){
     this.userService.deleteUser()
+    .subscribe();
+    this.jentryService.deleteAllJentries()
     .subscribe();
     this.logout();
   }

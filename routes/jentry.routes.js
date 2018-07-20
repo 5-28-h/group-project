@@ -72,8 +72,20 @@ router.put('/journalentries/:user_id/:_id', (req, res) => {
       return res.status(200).send(responseMsg);
       console.log(result);
     });
-
   });
+
+  //Delete All Journal Entries by User ID
+    router.delete('/journalentries/:user_id', (req, res) => {
+      Jentry.deleteMany({user_id: req.params.user_id}, (err, result) => {
+        if (err) return res.status(500).send(err);
+        const responseMsg = {
+          message: "All Journal Entries have been successfully removed"
+        };
+        return res.status(200).send(responseMsg);
+        console.log(result);
+      });
+
+    });
 
 
 module.exports = router;
