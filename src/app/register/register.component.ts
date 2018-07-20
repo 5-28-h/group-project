@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { User } from '../models/user';
 import { UserService } from '../services/user.service';
+import { NgFlashMessageService } from 'ng-flash-messages';
 
 @Component({
   selector: 'app-register',
@@ -11,12 +12,21 @@ import { UserService } from '../services/user.service';
 export class RegisterComponent implements OnInit {
   constructor(
     public user: User,
-    public userService: UserService) { }
+    public userService: UserService,
+    public ngFlashMessageService: NgFlashMessageService
+  ) { }
 
    registerUser(user){
       this.userService.create(this.user)
       .subscribe();
-          window.location.href = "/login";;
+      this.ngFlashMessageService.showFlashMessage({
+      messages: ["You have successfully registered"],
+      timeout: 2000,
+      type: 'success'
+    });
+    setTimeout(function () {
+   window.location.href = "/login";
+}, 3000);
 }
   ngOnInit() {
     this.user.name = null;

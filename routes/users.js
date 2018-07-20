@@ -20,7 +20,7 @@ router.post('/register', (req, res, next) => {
     if(err) {
       res.send(err);
     } else {
-      res.sendStatus(200);
+      res.sendStatus(204);
     }
   })
 });

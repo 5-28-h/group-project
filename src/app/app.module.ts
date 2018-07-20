@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BsDropdownModule } from 'ngx-bootstrap';
+import { NgFlashMessagesModule } from 'ng-flash-messages';
 
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
@@ -24,7 +25,11 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'journal', component: JournalEntriesComponent },
-  { path: 'update', component: UpdateUserComponent }
+  { path: 'update', component: UpdateUserComponent },
+  { path: '',
+    redirectTo: '/login',
+    pathMatch: 'full'
+  },
 ];
 
 
@@ -42,6 +47,7 @@ const appRoutes: Routes = [
     FormsModule,
     HttpClientModule,
     NgbCollapseModule,
+    NgFlashMessagesModule.forRoot(),
     NgbModule.forRoot(),
     BsDropdownModule.forRoot(
       appRoutes
